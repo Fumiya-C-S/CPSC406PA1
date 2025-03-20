@@ -1,5 +1,6 @@
 # a class for DFAs
 # modify as needed
+import nfa
 class DFA :
 
     # init the DFA
@@ -32,8 +33,7 @@ class DFA :
         return DFA(self.Q, self.Sigma, self.delta, self.q0, newFinalStates)
 
 
-
-
-
-        
+    def to_NFA(self):
+        newdelta = lambda q, s: {s: [self.delta(q, s)]}
+        return nfa.NFA(self.Q, self.Sigma, newdelta, self.q0, self.F)
 
