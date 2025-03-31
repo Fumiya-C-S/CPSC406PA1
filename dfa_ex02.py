@@ -1,5 +1,4 @@
 import dfa
-import nfa as nfa
 
 def delta(state, letter):
     transitions = {

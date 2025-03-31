@@ -21,6 +21,7 @@ class DFA :
     def run(self, w):
         curState = self.q0
         for letter in w:
+            # check for state of delta
             if callable(self.delta):
                 curState = self.delta(curState, letter)
             else:

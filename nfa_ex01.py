@@ -51,7 +51,6 @@ def __main__() :
               ("q4", "1"):["q4"],}
     A4 = nfa.NFA(set(["q0","q1","q2","q3","q4"]), set([0, 1]), A4dict, "q0", set(["q4"]), False)
     
-    
     words = generate_words()
     automatas = [A1,A2,A3,A4]
 

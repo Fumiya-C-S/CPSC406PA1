@@ -66,9 +66,11 @@ class NFA :
         
         while nodes_to_visit:
             current_node = nodes_to_visit.pop(0)
+
             for trans in self.Sigma:
                 trans = str(trans)
                 new_node = []
+                
                 for state in current_node:
                     if (state, trans) in self.delta:
                         new_node.extend(self.delta[(state, trans)])
@@ -77,12 +79,13 @@ class NFA :
                     current_key = tuple(current_node)
                     new_key = tuple(new_node)
                     newDelta[(current_key, trans)] = new_key
+                    
                     if new_node not in visited_nodes:
                         visited_nodes.append(new_node)
                         nodes_to_visit.append(new_node)
                         newQ.append(new_key)
-                        
                         accepting = any(state in self.F for state in new_node)
+
                         if accepting:
                             newF.append(new_key)
         return dfa.DFA(newQ, self.Sigma, newDelta, (self.q0,), newF)

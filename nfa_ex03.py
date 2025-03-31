@@ -2,9 +2,6 @@ import nfa
 import dfa
 
 def generate_words(alphabet, max_length=3):
-    """
-    Generate all words over the given alphabet from length 0 to max_length.
-    """
     words = []
     def helper(prefix, length):
         if length == 0:
@@ -17,8 +14,7 @@ def generate_words(alphabet, max_length=3):
     return words
 
 def main():
-    # --- Define NFAs ---
-    # NFA A1
+    # define NFAs
     A1dict = {
         ("q0", "0"): ["q0", "q1"],
         ("q0", "1"): [],
@@ -27,7 +23,6 @@ def main():
     }
     A1 = nfa.NFA(set(["q0", "q1"]), set(["0", "1"]), A1dict, "q0", set(["q1"]), False)
 
-    # NFA A2
     A2dict = {
         ("q0", "0"): ["q0", "q1"],
         ("q0", "1"): ["q0"],
@@ -38,7 +33,6 @@ def main():
     }
     A2 = nfa.NFA(set(["q0", "q1", "q2"]), set(["0", "1"]), A2dict, "q0", set(["q2"]), False)
 
-    # NFA A3
     A3dict = {
         ("q0", "0"): ["q0", "q1"],
         ("q0", "1"): ["q0"],
@@ -49,7 +43,6 @@ def main():
     }
     A3 = nfa.NFA(set(["q0", "q1", "q2"]), set(["0", "1"]), A3dict, "q0", set(["q0", "q1"]), False)
 
-    # NFA A4
     A4dict = {
         ("q0", "0"): ["q0"],
         ("q0", "1"): ["q0", "q1"],
@@ -64,7 +57,7 @@ def main():
     }
     A4 = nfa.NFA(set(["q0", "q1", "q2", "q3", "q4"]), set(["0", "1"]), A4dict, "q0", set(["q4"]), False)
 
-    # New NFA (A5) with a different alphabet.
+    # New nfa with different alphabet
     A5dict = {
         ("p", "a"): ["p", "q"],
         ("p", "b"): ["r"],
@@ -75,7 +68,6 @@ def main():
     }
     A5 = nfa.NFA(set(["p", "q", "r"]), set(["a", "b"]), A5dict, "p", set(["r"]), False)
 
-    # List of NFAs to test.
     automata = [
         ("NFA A1", A1),
         ("NFA A2", A2),
@@ -97,13 +89,11 @@ def main():
         words = generate_words(alphabet, max_length=3)
         
         for w in words:
-            # Use 'ε' to denote the empty word.
-            display_word = w if w != "" else "ε"
-            # Reset the accepted flag before running the original NFA.
+            display_word = w if w != "" else "empty string"
             automaton.accepted = False
             nfa_result = automaton.run(w, automaton.q0)
             dfa_result = dfa_converted.run(w)
-            print("Word '{}' -> Original NFA: {} | Converted DFA: {}".format(display_word, nfa_result, dfa_result))
+            print("{} -> NFA: {} | Converted DFA: {}".format(display_word, nfa_result, dfa_result))
         print("--------------------------------------")
 
 if __name__ == "__main__":
