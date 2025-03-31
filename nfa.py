@@ -66,9 +66,51 @@ class NFA :
                     # return "Rejected"
         
 
-    def to_DFA():
+    def to_DFA(self):
+        newQ = []
+        newF = []
+        newDelta = {}
+        start_node = [self.q0]
+        nodes_to_visit = [start_node]
+        visited_nodes = [start_node]
+        newQ.append(start_node)
 
-        
 
-        return
+        #Nodes will be added so we cant use a for loop here, repeat while not empty
+        while nodes_to_visit:
+            current_node = nodes_to_visit.pop(0)
+
+            #Goes through the set of possible transitions
+            for trans in self.Sigma:
+                trans = str(trans)
+                new_node = []
+
+                for state in current_node:
+                    if (state, trans) in self.delta:
+                        #This adds all the nodes to list instead of list into listt
+                        new_node.extend(self.delta[(state, trans)])
+                #Prevent duplicates
+                new_node = sorted(set(new_node))
+
+                if new_node:
+                    current_key = tuple(current_node)
+                    new_key = tuple(new_node)
+                    newDelta[(current_key, trans)] = new_key
+
+                    if new_node not in visited_nodes:
+                        visited_nodes.append(new_node)
+                        nodes_to_visit.append(new_node)
+                        newQ.append(new_node)
+
+
+                        accepting = False
+                        for node in new_node:
+                            if node in self.F:
+                                accepting = True
+                                break
+
+                        if accepting:
+                            newF.append(new_node)
+
+        return dfa.DFA(newQ, self.Sigma, newDelta, tuple(self.q0), newF)
 
