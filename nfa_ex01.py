@@ -63,7 +63,7 @@ def __main__() :
          for w in words:
             # X.run(w, "q0")
             X.accepted = False
-            print(f"{w}: {X.run(w, "q0")}")
+            print(f"{w}: {X.run(w, 'q0')}")
 
          print("\n")
 

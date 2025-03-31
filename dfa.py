@@ -18,15 +18,16 @@ class DFA :
     # run the DFA on the word w
     # return if the word is accepted or not
     # modify as needed
-    def run(self, w) :
+    def run(self, w):
         curState = self.q0
         for letter in w:
-            curState = self.delta[(curState, letter)]
-        if(curState == self.F):
-            return True
-        else:
-            return False
-
+            if callable(self.delta):
+                curState = self.delta(curState, letter)
+            else:
+                if (curState, letter) not in self.delta:
+                    return "Rejected"
+                curState = self.delta[(curState, letter)]
+        return "Accepted" if curState in self.F else "Rejected"
 
     def refuse(self) :
         newFinalStates = self.Q - self.F
@@ -34,6 +35,9 @@ class DFA :
 
 
     def to_NFA(self):
-        newdelta = lambda q, s: {s: [self.delta(q, s)]}
-        return nfa.NFA(self.Q, self.Sigma, newdelta, self.q0, self.F)
+        newdelta = {}
+        for q in self.Q:
+            for s in self.Sigma:
+                newdelta[(q, s)] = [self.delta(q, s)]
+        return nfa.NFA(self.Q, self.Sigma, newdelta, self.q0, self.F, False)
 
