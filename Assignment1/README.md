@@ -1,4 +1,4 @@
-Ashton Carter, Landon Kauer, Ronan McDermott, Fumiya Shinagawa 
+Ashton Carter, Landon Kauer, Ronan McDermott, Fumiya Shinagawa
 CPSC406-01
 Programming Assignment 1
 
