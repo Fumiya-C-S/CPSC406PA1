@@ -1,6 +1,6 @@
-Ashton Carter, Landon Kauer, Ronan McDermott, Fumiya Shinagawa
 CPSC406-01
 Programming Assignment 1
+Ashton Carter, Landon Kauer, Ronan McDermott, Fumiya Shinagawa
 
 Source Files:
 dfa.py
